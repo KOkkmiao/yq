@@ -20,34 +20,34 @@ if __name__ == '__main__':
     threading.Thread(target=lambda: {
 
     }).start()
-    # elements = chrome.find_elements(By.XPATH, "//*[@id='nationTable']/table/tbody/tr")
-    # for element in elements:
-    #     # 点击
-    #     total_elements = element.find_elements(By.XPATH, "td")
-    #     elements_ = total_elements[1:]
-    #     all = total_elements[0].text
-    #     for to in elements_:
-    #         all += "\t" + to.text
-    #     # 查看class 内容 是否能打开
-    #     attribute = total_elements[0].find_element(By.XPATH, "div/span[1]").get_attribute("class")
-    #
-    #     if attribute != 'VirusTable_1-73-1_2NQDw6 ':
-    #         continue
-    #     # 走到这里证明是可以点击的。
-    #     chrome.execute_script("arguments[0].click();", total_elements[0])
-    #     sub_elements = chrome.find_element(By.CLASS_NAME, "VirusTable_1-73-1_3U6wJT").find_elements(By.XPATH,
-    #                                                                                                 "tbody/tr")
-    #     all += "\n"
-    #     for sub_element in sub_elements:
-    #
-    #         for sub_td in sub_element.find_elements(By.XPATH, "td"):
-    #             if sub_td.text == "待确认人员" or sub_td.text == "境外输入":
-    #                 break
-    #             all += "\t" + sub_td.text
-    #         all += "\n"
-    #     # 关闭这个城市
-    #     chrome.execute_script("arguments[0].click();", total_elements[0])
-    #     print(all)
+    elements = chrome.find_elements(By.XPATH, "//*[@id='nationTable']/table/tbody/tr")
+    for element in elements:
+        # 点击
+        total_elements = element.find_elements(By.XPATH, "td")
+        elements_ = total_elements[1:]
+        all = total_elements[0].text
+        for to in elements_:
+            all += "\t" + to.text
+        # 查看class 内容 是否能打开
+        attribute = total_elements[0].find_element(By.XPATH, "div/span[1]").get_attribute("class")
+
+        if attribute != 'VirusTable_1-73-1_2NQDw6 ':
+            continue
+        # 走到这里证明是可以点击的。
+        chrome.execute_script("arguments[0].click();", total_elements[0])
+        sub_elements = chrome.find_element(By.CLASS_NAME, "VirusTable_1-73-1_3U6wJT").find_elements(By.XPATH,
+                                                                                                    "tbody/tr")
+        all += "\n"
+        for sub_element in sub_elements:
+
+            for sub_td in sub_element.find_elements(By.XPATH, "td"):
+                if sub_td.text == "待确认人员" or sub_td.text == "境外输入":
+                    break
+                all += "\t" + sub_td.text
+            all += "\n"
+        # 关闭这个城市
+        chrome.execute_script("arguments[0].click();", total_elements[0])
+        print(all)
 
     chrome.find_element(By.XPATH, "//*[@id='foreignTable']/div").click()
     time.sleep(1)
@@ -91,6 +91,4 @@ if __name__ == '__main__':
         time.sleep(0.1)
         foreign_elements = chrome.find_elements(By.XPATH, "//*[@id='foreignTable']/table/tbody/tr/td/table/tbody/tr")
         count = foreign_elements.__len__()
-
-    time.sleep(5)
     chrome.close()
